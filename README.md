@@ -274,4 +274,5 @@ A core highlight of the Admin Panel is the ecological impact tracking:
 
 ## 🛡️ License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .. india india 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .. india india give me contributor fast 
+
