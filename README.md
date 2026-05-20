@@ -157,13 +157,13 @@ graph TD
 - [x] Integrate Socket.io server-side for broadcast alerts to nearby NGOs.
 
 ### 🗺️ Phase 7 — Maps & Tracking System
-- [ ] Render interactive map UI on the Volunteer interface.
-- [ ] Add Leaflet/OSM map overlays for active route paths.
-- [ ] Integrate live geolocation tracking sending latitude/longitude updates over WebSockets.
+- [x] Render interactive map UI on the Volunteer interface using Leaflet and OpenStreetMap.
+- [x] Add OSRM (Open Source Routing Machine) map overlays for active route paths.
+- [x] Integrate live geolocation tracking sending latitude/longitude updates over WebSockets.
 
 ### 💬 Phase 8 — Multi-channel Notifications
-- [ ] Add support for Firebase Cloud Messaging (FCM) for background alerts.
-- [x] Set up Nodemailer for transactional emails (e.g. signup, recovery, pickup completions).
+- [x] Add support for browser-native Web Push Notifications via Service Workers (no Firebase required).
+- [x] Set up Nodemailer for transactional emails (e.g. signup, recovery, pickup completions) using Brevo SMTP.
 - [x] Implement in-app persistent notification logs.
 
 ### 🔮 Phase 9 — AI/ML Features (Placement Booster)
@@ -173,7 +173,7 @@ graph TD
 
 ### 🐳 Phase 10 — Deployment, Scaling & Monitoring
 - [x] Write optimized multi-stage Dockerfiles for Frontend, Backend, and ML services.
-- [ ] Set up continuous integration and deployment (CI/CD) pipelines to Vercel and Render.
+- [x] Set up continuous integration and deployment (CI/CD) pipelines to Vercel and Render via GitHub Actions.
 - [x] Add Prometheus/Grafana or Winston logging for exception monitoring and rate-limiting.
 
 ---
@@ -191,7 +191,13 @@ This project stands out from standard full-stack CRUD applications by addressing
    * Leverages WebSockets via Socket.io to stream real-time coordinate updates from the volunteer's mobile app directly to the donor and receiving NGO's screens.
 
 3. **Dynamic Route Optimization:**
-   * Utilizes Open Source Routing Machine (OSRM) or Google Directions API to offer volunteers the fastest path, taking traffic data and multiple drop-offs into account.
+   * Utilizes Open Source Routing Machine (OSRM) free endpoints to offer volunteers the fastest path, rendering a live purple polyline route on the interactive Leaflet map.
+
+4. **Rescue Copilot AI:**
+   * A floating smart chat widget providing real-time contextual assistance for volunteers and NGOs, predicting spoilage risks and explaining carbon impact metrics.
+
+5. **Advanced Environmental Impact Analytics:**
+   * Dynamic dual-axis Recharts visualizations rendering weekly CO₂ offsets vs. meals served to gamify and demonstrate tangible ESG impact.
 
 ---
 
@@ -212,9 +218,15 @@ cd Food-Rescue-Connect
 Create `/server/.env`:
 ```env
 PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_signing_key
-FASTAPI_SERVICE_URL=http://localhost:8000
+MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=any_secure_random_string
+ML_SERVICE_URL=http://localhost:8000
+OSRM_ENDPOINT=https://router.project-osrm.org
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=your_email@example.com
+SMTP_PASS=your_smtp_password
+FROM_EMAIL=your_email@example.com
 ```
 Run Backend:
 ```bash
@@ -224,11 +236,11 @@ npm run dev
 ```
 
 ### 3. Frontend Configuration
-Create `/client/.env.local`:
+Create `/client/.env`:
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
 NEXT_PUBLIC_SOCKET_URL=http://localhost:5000
-NEXT_PUBLIC_MAPS_KEY=your_maps_api_key
+NEXT_PUBLIC_MAP_TILE_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 ```
 Run Frontend:
 ```bash
