@@ -34,11 +34,13 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/auth');
 const foodRoutes = require('./routes/food');
 const transactionRoutes = require('./routes/transactions');
+const notificationRoutes = require('./routes/notifications');
 
 // Mount routers
 app.use('/api/auth', authRoutes);
 app.use('/api/food', foodRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Base route
 app.get('/', (req, res) => {

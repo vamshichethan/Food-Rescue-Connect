@@ -164,7 +164,7 @@ graph TD
 ### 💬 Phase 8 — Multi-channel Notifications
 - [ ] Add support for Firebase Cloud Messaging (FCM) for background alerts.
 - [ ] Set up Nodemailer for transactional emails (e.g. signup, recovery, pickup completions).
-- [ ] Implement in-app persistent notification logs.
+- [x] Implement in-app persistent notification logs.
 
 ### 🔮 Phase 9 — AI/ML Features (Placement Booster)
 - [x] Create FastAPI microservice backend.
@@ -172,7 +172,7 @@ graph TD
 - [x] Integrate recommendation endpoint indicating the best NGO based on current storage capacity and active needs.
 
 ### 🐳 Phase 10 — Deployment, Scaling & Monitoring
-- [ ] Write optimized multi-stage Dockerfiles for Frontend, Backend, and ML services.
+- [x] Write optimized multi-stage Dockerfiles for Frontend, Backend, and ML services.
 - [ ] Set up continuous integration and deployment (CI/CD) pipelines to Vercel and Render.
 - [ ] Add Prometheus/Grafana or Winston logging for exception monitoring and rate-limiting.
 
