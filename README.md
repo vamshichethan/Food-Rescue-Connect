@@ -271,9 +271,7 @@ A core highlight of the Admin Panel is the ecological impact tracking:
 | **Database** | MongoDB Atlas | Multi-region replica setup with automatic automated backups. |
 
 ---
-git hub fails 
-# github fAILS 
+
 ## 🛡️ License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .. india india give me contributor fast 
-git hub fails 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .
