@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: frc-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-password}
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: frc-server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/food-rescue
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:5000"
+    networks:
+      - frc-network
+
+  ml:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    container_name: frc-ml
+    restart: unless-stopped
+    env_file:
+      - ./ml/.env
+    environment:
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    networks:
+      - frc-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: frc-client
+    restart: unless-stopped
+    env_file:
+      - ./client/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+      - ml
+    networks:
+      - frc-network
+
+networks:
+  frc-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

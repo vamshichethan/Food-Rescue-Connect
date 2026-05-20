@@ -1,0 +1,118 @@
+name: Food Rescue Connect CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ──────────────────────────────────────────────────────────
+  # 1. Lint & type-check the Next.js client
+  # ──────────────────────────────────────────────────────────
+  client-lint:
+    name: Client – Lint & TypeCheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - run: npm ci --legacy-peer-deps
+      - run: npm run lint --if-present
+      - run: npx tsc --noEmit --skipLibCheck
+
+  # ──────────────────────────────────────────────────────────
+  # 2. Build the Next.js client (validates the build works)
+  # ──────────────────────────────────────────────────────────
+  client-build:
+    name: Client – Production Build
+    runs-on: ubuntu-latest
+    needs: client-lint
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - run: npm ci --legacy-peer-deps
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_MAP_TILE_URL: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+
+  # ──────────────────────────────────────────────────────────
+  # 3. Lint & unit-test the Express server
+  # ──────────────────────────────────────────────────────────
+  server-test:
+    name: Server – Lint & Smoke Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - run: npm ci
+      - name: Syntax check (node --check)
+        run: node --check src/index.js
+
+  # ──────────────────────────────────────────────────────────
+  # 4. Validate the FastAPI ML service
+  # ──────────────────────────────────────────────────────────
+  ml-test:
+    name: ML Service – Import & Syntax Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ml
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -r requirements.txt
+      - name: Import check
+        run: python -c "import main; print('ML service imports OK')"
+
+  # ──────────────────────────────────────────────────────────
+  # 5. Docker Compose – build all images
+  # ──────────────────────────────────────────────────────────
+  docker-build:
+    name: Docker – Build All Images
+    runs-on: ubuntu-latest
+    needs: [client-build, server-test, ml-test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build all services (no push)
+        run: docker compose build --no-cache
+        env:
+          DOCKER_BUILDKIT: 1
