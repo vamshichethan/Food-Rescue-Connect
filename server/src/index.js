@@ -35,6 +35,7 @@ const authRoutes = require('./routes/auth');
 const foodRoutes = require('./routes/food');
 const transactionRoutes = require('./routes/transactions');
 const notificationRoutes = require('./routes/notifications');
+const errorHandler = require('./middleware/error');
 
 // Mount routers
 app.use('/api/auth', authRoutes);
@@ -46,6 +47,9 @@ app.use('/api/notifications', notificationRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Food Rescue Connect API' });
 });
+
+// Global Error Handler Middleware
+app.use(errorHandler);
 
 // Socket.io Real-Time Coordination Engine
 io.on('connection', (socket) => {
