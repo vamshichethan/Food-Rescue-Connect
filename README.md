@@ -127,34 +127,34 @@ graph TD
 ## 🚀 10-Phase Roadmap
 
 ### 📋 Phase 1 — Project Planning & Requirements
-- [ ] Define precise database models for Users, Food Listings, Donations, and Volunteers.
-- [ ] Map complete API endpoint routes and payload structures.
-- [ ] Wireframe key navigation pathways for all 4 roles.
+- [x] Define precise database models for Users, Food Listings, Donations, and Volunteers.
+- [x] Map complete API endpoint routes and payload structures.
+- [x] Wireframe key navigation pathways for all 4 roles.
 
 ### 🎨 Phase 2 — UI/UX Design
-- [ ] Design custom dashboard templates for Donor, NGO, and Volunteer roles.
-- [ ] Establish design tokens (consistent spacing, curated warm color palette, typography).
-- [ ] Create detailed Figma prototypes focusing on high-fidelity responsive mockups.
+- [x] Design custom dashboard templates for Donor, NGO, and Volunteer roles.
+- [x] Establish design tokens (consistent spacing, curated warm color palette, typography).
+- [x] Create detailed Figma prototypes focusing on high-fidelity responsive mockups.
 
 ### 🏗️ Phase 3 — Frontend Foundation
-- [ ] Scaffold Next.js application with TypeScript and Tailwind CSS.
-- [ ] Implement global layouts including Navbars, Sidebars, and Footer components.
-- [ ] Build reusable UI blocks (cards, buttons, modal windows, forms with validation).
+- [x] Scaffold Next.js application with TypeScript and Tailwind CSS.
+- [x] Implement global layouts including Navbars, Sidebars, and Footer components.
+- [x] Build reusable UI blocks (cards, buttons, modal windows, forms with validation).
 
 ### 🔒 Phase 4 — Backend & Database Setup
-- [ ] Initialize Node.js & Express server with absolute path routing.
-- [ ] Set up MongoDB Atlas cluster and mongoose schemas.
-- [ ] Implement standard RESTful controllers for base CRUD operations.
+- [x] Initialize Node.js & Express server with absolute path routing.
+- [x] Set up MongoDB Atlas cluster and mongoose schemas.
+- [x] Implement standard RESTful controllers for base CRUD operations.
 
 ### 🛡️ Phase 5 — Authentication & Role-Based Access Control
-- [ ] Set up JWT verification middleware.
-- [ ] Implement password hashing using bcrypt.
-- [ ] Create role guards for API endpoints (`/api/donor/*`, `/api/ngo/*`, `/api/volunteer/*`).
+- [x] Set up JWT verification middleware.
+- [x] Implement password hashing using bcrypt.
+- [x] Create role guards for API endpoints (`/api/donor/*`, `/api/ngo/*`, `/api/volunteer/*`).
 
 ### ⚡ Phase 6 — Real-Time Food Matching
-- [ ] Build geo-indexing queries in MongoDB.
-- [ ] Develop the Haversine formula backend helper to calculate distances dynamically.
-- [ ] Integrate Socket.io server-side for broadcast alerts to nearby NGOs.
+- [x] Build geo-indexing queries in MongoDB.
+- [x] Develop the Haversine formula backend helper to calculate distances dynamically.
+- [x] Integrate Socket.io server-side for broadcast alerts to nearby NGOs.
 
 ### 🗺️ Phase 7 — Maps & Tracking System
 - [ ] Render interactive map UI on the Volunteer interface.
@@ -167,9 +167,9 @@ graph TD
 - [ ] Implement in-app persistent notification logs.
 
 ### 🔮 Phase 9 — AI/ML Features (Placement Booster)
-- [ ] Create FastAPI microservice backend.
-- [ ] Train an XGBoost model using historical delivery times, distance, and expiry to forecast the probability of food spoilage.
-- [ ] Integrate recommendation endpoint indicating the best NGO based on current storage capacity and active needs.
+- [x] Create FastAPI microservice backend.
+- [x] Train an XGBoost model using historical delivery times, distance, and expiry to forecast the probability of food spoilage.
+- [x] Integrate recommendation endpoint indicating the best NGO based on current storage capacity and active needs.
 
 ### 🐳 Phase 10 — Deployment, Scaling & Monitoring
 - [ ] Write optimized multi-stage Dockerfiles for Frontend, Backend, and ML services.
