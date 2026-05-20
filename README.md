@@ -163,7 +163,7 @@ graph TD
 
 ### 💬 Phase 8 — Multi-channel Notifications
 - [ ] Add support for Firebase Cloud Messaging (FCM) for background alerts.
-- [ ] Set up Nodemailer for transactional emails (e.g. signup, recovery, pickup completions).
+- [x] Set up Nodemailer for transactional emails (e.g. signup, recovery, pickup completions).
 - [x] Implement in-app persistent notification logs.
 
 ### 🔮 Phase 9 — AI/ML Features (Placement Booster)
