@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const sendEmail = require('../config/email');
 
 const router = express.Router();
 
@@ -45,6 +46,24 @@ router.post('/register', async (req, res) => {
 
     // Create token
     const token = getSignedJwtToken(user._id);
+
+    // Send Welcome Transactional Email (async, doesn't block response)
+    const welcomeHtml = `
+      <div style="font-family: sans-serif; padding: 20px; color: #111; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 10px;">
+        <h2 style="color: #8b5cf6;">🍕 Welcome to Food Rescue Connect, ${user.name}!</h2>
+        <p>Thank you for registering as a key partner: <strong>${user.role.toUpperCase()}</strong>.</p>
+        <p>Our real-time matching, socket coordination, and machine learning models are fully active in your area to prevent waste and feed local communities.</p>
+        <p>Login to your portal to start listing, claiming, or navigating active rescues today!</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+        <p style="font-size: 12px; color: #777;">Food Rescue Connect Logistics Services Inc.</p>
+      </div>
+    `;
+    
+    sendEmail({
+      email: user.email,
+      subject: '🍕 Welcome to Food Rescue Connect!',
+      html: welcomeHtml,
+    });
 
     res.status(201).json({
       success: true,
