@@ -1,4 +1,4 @@
-# 🍕 Food Rescue Connect
+ # 🍕 Food Rescue Connect
 
 > A real-time, AI-driven logistics and matching platform bridging the gap between food donors, volunteers, and NGOs to minimize food waste and support communities.
 
@@ -274,4 +274,4 @@ A core highlight of the Admin Panel is the ecological impact tracking:
 
 ## 🛡️ License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details .  
