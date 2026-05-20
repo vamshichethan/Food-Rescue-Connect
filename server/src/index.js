@@ -20,9 +20,24 @@ const io = socketio(server, {
   },
 });
 
+const rateLimit = require('express-rate-limit');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// API Rate Limiting (Prevents brute-force or abuse)
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: 'Too many requests from this IP, please try again after 15 minutes',
+  },
+});
+app.use('/api/', apiLimiter);
 
 // Pass Socket.io engine to express requests
 app.use((req, res, next) => {
