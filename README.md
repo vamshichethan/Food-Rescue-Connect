@@ -2,6 +2,11 @@
 
 > A real-time, AI-driven logistics and matching platform bridging the gap between food donors, volunteers, and NGOs to minimize food waste and support communities.
 
+### 🌐 Live Demos
+* **Frontend Application:** [https://client-sandy-nine.vercel.app](https://client-sandy-nine.vercel.app)
+* **API Backend Service:** [https://food-rescue-connect-api.onrender.com](https://food-rescue-connect-api.onrender.com)
+* **ML Analytics Engine:** [https://food-rescue-connect-ml.onrender.com](https://food-rescue-connect-ml.onrender.com)
+
 ---
 
 [![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&style=flat-square)](https://nextjs.org/)
