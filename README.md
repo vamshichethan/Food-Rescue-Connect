@@ -174,7 +174,7 @@ graph TD
 ### 🐳 Phase 10 — Deployment, Scaling & Monitoring
 - [x] Write optimized multi-stage Dockerfiles for Frontend, Backend, and ML services.
 - [ ] Set up continuous integration and deployment (CI/CD) pipelines to Vercel and Render.
-- [ ] Add Prometheus/Grafana or Winston logging for exception monitoring and rate-limiting.
+- [x] Add Prometheus/Grafana or Winston logging for exception monitoring and rate-limiting.
 
 ---
 
